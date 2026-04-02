@@ -1,0 +1,393 @@
+:root {
+  --bg: #ebe8df;
+  --panel: #f7f4eb;
+  --panel-2: #efeadf;
+  --grid: rgba(22, 20, 18, 0.07);
+  --text: #151311;
+  --muted: #67615c;
+  --accent: #d9d4ca;
+  --accent-dark: #a39c92;
+  --danger: #c9c3b8;
+  --shadow: #2f2b28;
+  --line: #1f1c19;
+  --pixel: "Press Start 2P", "Cascadia Mono", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  image-rendering: pixelated;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--pixel);
+  color: var(--text);
+  background:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(180deg, #fbfaf6 0%, #e8e3d9 100%);
+  background-size: 20px 20px, 20px 20px, 100% 100%;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  letter-spacing: 0.04em;
+}
+
+.app-shell {
+  width: min(100%, 430px);
+  margin: 0 auto;
+  padding: 18px 14px 24px;
+}
+
+.app-header,
+.pixel-panel,
+.pixel-button,
+.pixel-icon-btn,
+.nav-btn,
+input {
+  border: 3px solid var(--line);
+  box-shadow: 6px 6px 0 var(--shadow);
+}
+
+.app-header,
+.pixel-panel {
+  background: var(--panel);
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.header-copy {
+  min-width: 0;
+}
+
+.eyebrow,
+.label {
+  margin: 0 0 8px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 28px;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+}
+
+h2 {
+  line-height: 1.3;
+}
+
+h3 {
+  line-height: 1.4;
+}
+
+.phone-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.screen {
+  display: none;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.hero,
+.timer-panel,
+.workout-card,
+.rest-controls,
+.section-title,
+.workout-card-main,
+.bottom-nav,
+.calendar-nav,
+.form-actions,
+.set-form {
+  display: flex;
+}
+
+.hero,
+.timer-panel {
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+}
+
+.pixel-avatar {
+  width: 82px;
+  height: 82px;
+  border: 3px solid var(--line);
+  background:
+    linear-gradient(90deg, transparent 0 22%, #b8b2a7 22% 34%, transparent 34% 46%, #888178 46% 62%, transparent 62%),
+    linear-gradient(transparent 0 18%, #979084 18% 30%, transparent 30% 40%, #f8f6ef 40% 72%, #979084 72%);
+  position: relative;
+}
+
+.pixel-avatar span {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0 20%, #201d1a 20% 28%, transparent 28% 58%, #201d1a 58% 66%, transparent 66%),
+    linear-gradient(transparent 0 62%, #201d1a 62% 70%, transparent 70%);
+}
+
+.section-title {
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.calendar-title-row {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  row-gap: 14px;
+}
+
+.calendar,
+.today-log,
+.form,
+.session-picker,
+.active-workout {
+  padding: 16px;
+}
+
+.calendar-nav {
+  align-items: center;
+  gap: 14px;
+  margin-left: auto;
+  padding-left: 12px;
+}
+
+#calendarTitle {
+  min-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.calendar-weekdays,
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.weekday,
+.calendar-day {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 12px;
+}
+
+.calendar-day {
+  background: var(--panel-2);
+  border: 2px solid transparent;
+  min-height: 48px;
+}
+
+.calendar-day.checked {
+  background: #cbc5bb;
+  border-color: var(--line);
+}
+
+.calendar-day.today {
+  border-color: var(--line);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.pixel-button,
+.pixel-icon-btn,
+.nav-btn {
+  cursor: pointer;
+  background: #fffdfa;
+  padding: 12px 14px;
+  color: var(--text);
+}
+
+.pixel-button.small {
+  padding: 10px 12px;
+}
+
+.pixel-button.primary,
+.nav-btn.active,
+.session-option.active {
+  background: var(--accent);
+}
+
+.pixel-button.danger {
+  background: var(--danger);
+}
+
+.pixel-icon-btn {
+  padding: 8px 12px;
+  min-width: 52px;
+}
+
+.bottom-nav {
+  margin-top: 14px;
+  padding: 8px;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.nav-btn {
+  flex: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+.form,
+.set-form {
+  gap: 12px;
+  flex-direction: column;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+input {
+  width: 100%;
+  background: #fff;
+  padding: 12px;
+}
+
+.workout-list,
+.session-workout-picker,
+.set-history {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.workout-card {
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+}
+
+.workout-card-main {
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.workout-thumb {
+  width: 54px;
+  height: 54px;
+  border: 3px solid var(--line);
+  background: repeating-linear-gradient(45deg, #faf8f0 0 6px, #ddd7cb 6px 12px);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: grayscale(1) contrast(1.05);
+  flex-shrink: 0;
+}
+
+.workout-title {
+  font-size: 16px;
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.workout-meta,
+.set-row,
+.rest-timer {
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.rest-controls {
+  margin-top: 16px;
+  gap: 10px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.rest-seconds-field {
+  min-width: 132px;
+  flex: 1;
+}
+
+.rest-timer {
+  margin-top: 14px;
+  padding: 12px;
+  border: 3px dashed var(--line);
+  background: #efe9de;
+}
+
+.set-row {
+  padding: 10px;
+  background: #f1ece2;
+  border: 2px solid var(--line);
+}
+
+@media (max-width: 420px) {
+  .app-header,
+  .hero,
+  .timer-panel,
+  .section-title,
+  .workout-card,
+  .rest-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .calendar-title-row {
+    align-items: stretch;
+  }
+
+  .calendar-nav {
+    margin-left: 0;
+    justify-content: space-between;
+    padding-left: 0;
+  }
+
+  #calendarTitle {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .bottom-nav {
+    position: sticky;
+    bottom: 10px;
+  }
+}

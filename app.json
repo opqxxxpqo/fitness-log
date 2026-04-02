@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "健身记录",
+    "slug": "fitness-log",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "extra": {
+      "eas": {
+        "projectId": "4641858b-2700-4bfe-87cc-6b95d5dbcc21"
+      }
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.codex.fitnesslog"
+    },
+    "android": {
+      "package": "com.codex.fitnesslog",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "允许健身记录访问你的照片，用于给训练项目设置图片。"
+        }
+      ]
+    ],
+    "owner": "opqxxx"
+  }
+}

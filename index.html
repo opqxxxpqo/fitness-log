@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>健身记录</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="app-header pixel-panel">
+        <div class="header-copy">
+          <p class="eyebrow">FITNESS LOG</p>
+          <h1>健身记录</h1>
+        </div>
+        <button id="todayCheckinBtn" class="pixel-button primary">今日打卡</button>
+      </header>
+
+      <main class="phone-frame">
+        <section id="screen-home" class="screen active">
+          <div class="hero pixel-panel">
+            <div>
+              <p class="label">本周进度</p>
+              <h2 id="weeklyProgress">0 / 7</h2>
+              <p id="heroSummary" class="muted">今天还没有训练记录</p>
+            </div>
+            <div class="pixel-avatar" aria-hidden="true">
+              <span></span>
+            </div>
+          </div>
+
+          <div class="calendar pixel-panel">
+            <div class="section-title calendar-title-row">
+              <h3>打卡日历</h3>
+              <div class="calendar-nav">
+                <button id="prevMonthBtn" class="pixel-icon-btn" type="button">&lt;</button>
+                <span id="calendarTitle"></span>
+                <button id="nextMonthBtn" class="pixel-icon-btn" type="button">&gt;</button>
+              </div>
+            </div>
+            <div class="calendar-weekdays" id="calendarWeekdays"></div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+          </div>
+
+          <div class="today-log pixel-panel">
+            <div class="section-title">
+              <h3>最近一次训练</h3>
+              <button id="startWorkoutBtn" class="pixel-button" type="button">开始健身</button>
+            </div>
+            <div id="recentWorkout" class="muted">还没有训练内容，先去创建一个项目吧。</div>
+          </div>
+        </section>
+
+        <section id="screen-workouts" class="screen">
+          <div class="section-title">
+            <h2>训练库</h2>
+            <button id="toggleWorkoutFormBtn" class="pixel-button primary" type="button">新增项目</button>
+          </div>
+
+          <form id="workoutForm" class="pixel-panel form hidden">
+            <label>
+              项目名称
+              <input id="workoutName" name="workoutName" type="text" maxlength="24" placeholder="例如：哑铃卧推" required />
+            </label>
+            <label>
+              分类
+              <input id="workoutCategory" name="workoutCategory" type="text" maxlength="24" placeholder="例如：胸 / 背 / 腿" />
+            </label>
+            <label>
+              默认组数
+              <input id="workoutSets" name="workoutSets" type="number" min="1" max="20" value="4" />
+            </label>
+            <label>
+              默认次数
+              <input id="workoutReps" name="workoutReps" type="number" min="1" max="50" value="12" />
+            </label>
+            <label>
+              默认重量(kg)
+              <input id="workoutWeight" name="workoutWeight" type="number" min="0" max="500" value="20" />
+            </label>
+            <label>
+              像素图片
+              <input id="workoutImage" name="workoutImage" type="file" accept="image/*" />
+            </label>
+            <div class="form-actions">
+              <button type="submit" class="pixel-button primary">保存项目</button>
+              <button type="button" id="cancelWorkoutFormBtn" class="pixel-button">取消</button>
+            </div>
+          </form>
+
+          <div id="workoutList" class="workout-list"></div>
+        </section>
+
+        <section id="screen-session" class="screen">
+          <div class="pixel-panel timer-panel">
+            <div>
+              <p class="label">训练计时</p>
+              <h2 id="sessionTimer">00:00</h2>
+            </div>
+            <button id="finishSessionBtn" class="pixel-button danger" type="button">结束训练</button>
+          </div>
+
+          <div class="pixel-panel session-picker">
+            <div class="section-title">
+              <h3>选择训练项目</h3>
+              <span id="sessionDateLabel" class="muted"></span>
+            </div>
+            <div id="sessionWorkoutPicker" class="session-workout-picker"></div>
+          </div>
+
+          <div class="pixel-panel active-workout">
+            <div class="section-title">
+              <h3>当前记录</h3>
+              <span id="activeWorkoutName" class="muted">请选择一个项目开始记录</span>
+            </div>
+
+            <form id="setEntryForm" class="set-form">
+              <label>
+                组数
+                <input id="setNumber" type="number" min="1" max="99" value="1" required />
+              </label>
+              <label>
+                次数
+                <input id="setReps" type="number" min="1" max="99" value="12" required />
+              </label>
+              <label>
+                重量(kg)
+                <input id="setWeight" type="number" min="0" max="999" value="20" required />
+              </label>
+              <button type="submit" class="pixel-button primary">记录这一组</button>
+            </form>
+
+            <div class="rest-controls">
+              <button id="startRestBtn" class="pixel-button" type="button">组间休息</button>
+              <label class="rest-seconds-field">
+                自定义秒数
+                <input id="restSeconds" type="number" min="10" max="600" value="90" />
+              </label>
+              <button id="skipRestBtn" class="pixel-button" type="button">自由跳过</button>
+            </div>
+
+            <div id="restTimerCard" class="rest-timer muted">休息计时未开始</div>
+            <div id="setHistory" class="set-history"></div>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav pixel-panel">
+        <button data-screen="screen-home" class="nav-btn active" type="button">主页</button>
+        <button data-screen="screen-workouts" class="nav-btn" type="button">训练库</button>
+        <button data-screen="screen-session" class="nav-btn" type="button">训练中</button>
+      </nav>
+    </div>
+
+    <template id="workoutCardTemplate">
+      <article class="workout-card pixel-panel">
+        <div class="workout-card-main">
+          <div class="workout-thumb"></div>
+          <div>
+            <h3 class="workout-title"></h3>
+            <p class="workout-meta"></p>
+          </div>
+        </div>
+        <button class="pixel-button small workout-delete-btn" type="button">删除</button>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
