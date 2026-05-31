@@ -1,0 +1,35 @@
+node_modules/
+.expo/
+dist/
+.expo-web-build/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+android/
+ios/
+.DS_Store
+
+# Local design source (large Figma exports — 100MB+ total)
+ACN*.html
+ACN*.body.html
+
+# Temp scripts and build artifacts
+.tmp_*.js
+*.tsbuildinfo
+
+# Editor / IDE
+.vscode/
+.idea/
+
+# Claude Code local config & skill installs (per-developer)
+.claude/
+.agents/
+skills-lock.json
+
+# OS junk
+Thumbs.db
